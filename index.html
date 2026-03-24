@@ -11,17 +11,36 @@
 
     <p id="resultFactors"></p>
 
+    <input type="number" id="numPrimes" />
+    <button onclick="callPrimes()">Calcular primos</button>
+
+    <p id="resultPrimes"></p>
+
     <script>
       function callFactor() {
         let n = document.getElementById("numFactors").value;
 
-        fetch("http://IP_PROXY:8080/fibonacci?n=" + n)
+        fetch("http://ec2-18-205-247-83.compute-1.amazonaws.com:8080/factors?n=" + n)
           .then((res) => res.text())
           .then((data) => {
             document.getElementById("resultFactors").innerText = data;
           })
           .catch((error) => {
             document.getElementById("resultFactors").innerText =
+              "Error: " + error.message;
+          });
+      }
+
+      function callPrimes() {
+        let n = document.getElementById("numPrimes").value;
+
+        fetch("http://ec2-18-205-247-83.compute-1.amazonaws.com:8080/primes?n=" + n)
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById("resultPrimes").innerText = data;
+          })
+          .catch((error) => {
+            document.getElementById("resultPrimes").innerText =
               "Error: " + error.message;
           });
       }
