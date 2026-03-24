@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Math Client</title>
+  </head>
+  <body>
+    <h2>Fibonacci</h2>
+
+    <input type="number" id="numFactors" />
+    <button onclick="callFactor()">Calcular factores</button>
+
+    <p id="resultFactors"></p>
+
+    <script>
+      function callFactor() {
+        let n = document.getElementById("numFactors").value;
+
+        fetch("http://IP_PROXY:8080/fibonacci?n=" + n)
+          .then((res) => res.text())
+          .then((data) => {
+            document.getElementById("resultFactors").innerText = data;
+          })
+          .catch((error) => {
+            document.getElementById("resultFactors").innerText =
+              "Error: " + error.message;
+          });
+      }
+    </script>
+  </body>
+</html>
